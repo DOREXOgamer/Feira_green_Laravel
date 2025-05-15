@@ -1,80 +1,75 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <title>FeiraGreen</title>
+    <link rel="stylesheet" href="{{ asset('css/produtos.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<header>
+    <div class="logo">
+        <a href="{{ url('/') }}"><img src="{{ asset('imagens/logoverde.png') }}" alt="Logo" width="200"></a>
+    </div>
+    <div id="area-menu">
+        <a href="#">Frutas</a>
+        <a href="#">Verduras</a>
+        <a href="#">Hortaliças</a>
+        <a href="#">Legumes</a>
+        <a href="#">Outros</a>
+    </div>
+    <nav>
+        <form method="GET" action="{{ url('buscar') }}" class="barra-pesquisa">
+            <input type="text" name="palavra" placeholder="Buscar produto..." required>
+            <button type="submit" class="botao-pesquisa">
+                <img src="{{ asset('imagens/pesquisa.png') }}" alt="Pesquisar" width="20">
+            </button>
+        </form>
+        <a href="{{ url('perfil') }}"><img src="{{ asset('imagens/usuario.png') }}" alt="Usuário" width="20"></a>
+        <a href="{{ url('carrinho')  }}"><img src="{{ asset('imagens/carrinho-carrinho.png') }}" alt="Carrinho" width="20"></a>
+    </nav>
+</header>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+<div class="line"></div>
 
-                    </ul>
+<main>
+    @yield('content')
+</main>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
+<div class="line"></div>
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+<footer>
+    <div class="footer">
+        <div class="footer-top">
+            <div class="footer-top--left">
+                <a href="#">Contato</a>
+                <a href="#">Termos de Serviço</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Cancelamento, Troca e Reembolso</a>
+            </div>
+            <div class="footer-top--right">
+                <span>Boletim de Notícias</span>
+                <div class="footer-news-letter">
+                    <input class="footer-input" type="email" placeholder="Digite o seu e-mail">
+                    <button class="footer-button" type="button">Inscrever</button>
                 </div>
             </div>
-        </nav>
+        </div>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <div class="footer-bottom">
+            <div class="footer-bottom--left">
+                <a href="#"><img class="footer-image" src="{{ asset('assets/imagens/instagram.png') }}" alt=""></a>
+                <a href="#"><img class="footer-image" src="{{ asset('assets/imagens/facebook.png') }}" alt=""></a>
+            </div>
+            <div>
+                &copy; {{ date('Y') }} FeiraGreen. Todos os direitos reservados.
+            </div>
+            <div class="footer-bottom--right">
+                <img class="footer-image" src="{{ asset('assets/imagens/mastercard.png') }}" alt="">
+                <img class="footer-image" src="{{ asset('assets/imagens/paypal.png') }}" alt="">
+                <img class="footer-image" src="{{ asset('assets/imagens/visa.png') }}" alt="">
+            </div>
+        </div>
     </div>
+</footer>
 </body>
 </html>

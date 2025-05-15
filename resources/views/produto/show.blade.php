@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.main')
+
+@section('head')
+<link rel="stylesheet" href="{{ asset('css/produto_show.css') }}">
+@endsection
 
 @section('content')
 <div class="container produto-detalhes-container">
@@ -12,34 +16,10 @@
     <p><strong>Categoria:</strong> {{ $produto->categoria }}</p>
 
     <a href="{{ route('home') }}" class="btn btn-secondary">Voltar para a lista de produtos</a>
+
+    <form action="{{ route('cart.add', $produto->id) }}" method="POST" style="display:inline-block; margin-left: 10px;">
+        @csrf
+        <button type="submit" class="btn btn-success">Adicionar ao Carrinho</button>
+    </form>
 </div>
-
-<style>
-.produto-detalhes-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.produto-imagem {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-}
-
-.btn {
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    background-color: #6c757d;
-    color: white;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 20px;
-}
-
-.btn:hover {
-    background-color: #5a6268;
-}
-</style>
 @endsection

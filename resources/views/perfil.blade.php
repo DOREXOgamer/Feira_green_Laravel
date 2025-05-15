@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('head')
 <link rel="stylesheet" href="{{ asset('css/perfil_custom.css') }}">
@@ -67,7 +67,14 @@
 
             <div class="form-group mb-3">
                 <label for="categoria" class="form-label">Categoria:</label>
-                <input type="text" id="categoria" name="categoria" value="{{ old('categoria') }}" required class="form-control">
+                <select id="categoria" name="categoria" required class="form-control">
+                    <option value="">Selecione uma categoria</option>
+                    <option value="Frutas" {{ old('categoria') == 'Frutas' ? 'selected' : '' }}>Frutas</option>
+                    <option value="Verduras" {{ old('categoria') == 'Verduras' ? 'selected' : '' }}>Verduras</option>
+                    <option value="Hortaliças" {{ old('categoria') == 'Hortaliças' ? 'selected' : '' }}>Hortaliças</option>
+                    <option value="Legumes" {{ old('categoria') == 'Legumes' ? 'selected' : '' }}>Legumes</option>
+                    <option value="Outros" {{ old('categoria') == 'Outros' ? 'selected' : '' }}>Outros</option>
+                </select>
                 @error('categoria')
                     <div class="text-danger small">{{ $message }}</div>
                 @enderror
@@ -88,9 +95,15 @@
     <hr>
 
     <div class="logout-section text-center">
-        <form action="{{ route('logout') }}" method="POST">
+        <form action="{{ route('logout') }}" method="POST" style="display:inline-block; margin-right: 10px;">
             @csrf
             <button type="submit" class="btn btn-danger px-5">Sair</button>
+        </form>
+
+        <form action="{{ route('perfil.delete') }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Tem certeza que deseja deletar sua conta? Esta ação não pode ser desfeita.')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger px-5">Deletar Conta</button>
         </form>
     </div>
 </div>

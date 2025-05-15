@@ -25,7 +25,7 @@
             </button>
         </form>
         <a href="{{ url('perfil') }}"><img src="{{ asset('imagens/usuario.png') }}" alt="Usuário" width="20"></a>
-        <a href="#"><img src="{{ asset('imagens/carrinho-carrinho.png') }}" alt="Carrinho" width="20"></a>
+        <a href="{{ url('carrinho')  }}"><img src="{{ asset('imagens/carrinho-carrinho.png') }}" alt="Carrinho" width="20"></a>
     </nav>
 </header>
 
