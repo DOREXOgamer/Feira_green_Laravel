@@ -58,7 +58,8 @@ class HomeController extends Controller
     public function perfil()
     {
         $user = Auth::user();
-        return view('perfil', compact('user'));
+        $produtos = $user->produtos ?? collect();
+        return view('perfil', compact('user', 'produtos'));
     }
 
     /**

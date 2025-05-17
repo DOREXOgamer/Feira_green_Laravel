@@ -94,6 +94,35 @@
 
     <hr>
 
+    <div class="produto-list-section mb-5 p-4 border rounded shadow-sm bg-light">
+        <h2 class="mb-3">Meus Produtos</h2>
+        @if($produtos->isEmpty())
+            <p>Você não possui produtos cadastrados.</p>
+        @else
+            <div class="list-group">
+                @foreach($produtos as $produto)
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5>{{ $produto->nome }}</h5>
+                            <p>Preço: R$ {{ number_format($produto->preco, 2, ',', '.') }}</p>
+                            <p>Categoria: {{ $produto->categoria }}</p>
+                        </div>
+                        <div>
+                            <a href="{{ route('produto.edit', $produto->id) }}" class="btn btn-primary btn-sm me-2">Editar</a>
+                            <form action="{{ route('produto.delete', $produto->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Tem certeza que deseja deletar este produto?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+                            </form>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
+
+    <hr>
+
     <div class="logout-section text-center">
         <form action="{{ route('logout') }}" method="POST" style="display:inline-block; margin-right: 10px;">
             @csrf
