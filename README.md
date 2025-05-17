@@ -45,18 +45,20 @@ npm run dev
 
 4. **Configurar ambiente**
 
-Copie `.env.example` para `.env` e configure as definições do banco de dados. Para SQLite, crie o arquivo do banco:
+Copie `.env.example` para `.env` e configure as definições do banco de dados. Como você está usando o phpMyAdmin do XAMPP, configure o banco de dados MySQL conforme abaixo:
 
-```bash
-touch database/database.sqlite
-```
-
-Atualize o `.env`:
+Atualize o `.env` com as configurações do MySQL:
 
 ```
-DB_CONNECTION=sqlite
-DB_DATABASE=/caminho/completo/para/database/database.sqlite
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nome_do_banco_de_dados
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
 ```
+
+Certifique-se de criar o banco de dados no phpMyAdmin antes de executar as migrações.
 
 5. **Executar as migrações**
 
@@ -104,3 +106,11 @@ Se encontrar algum problema ou tiver dúvidas, por favor abra uma issue ou conta
 
 ---
 touch database/database.sqlite
+
+
+## CASO DE ERRO 
+```bash
+php artisan ui bootstrap --auth
+```
+nao modifique nada 
+opçao "no" em todos.
